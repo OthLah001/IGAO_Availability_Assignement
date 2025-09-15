@@ -1,19 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Peer } from '@/types/peer'
+import { toRefs } from 'vue'
+
+const props = defineProps<{
+  peer: Peer
+}>()
+
+const { peer } = toRefs(props)
+</script>
 
 <template>
   <div class="bg-white h-[451px] object-contain p-5 pb-3">
     <!-- Avatar & Name -->
     <div class="flex mb-4">
       <div class="w-18 h-18 rounded-full bg-gray-200">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0417/7869/files/Mark.png"
-          alt="Peer"
-          class="w-full h-full object-cover rounded-full"
-        />
+        <img :src="peer.image" alt="Peer" class="w-full h-full object-cover rounded-full" />
       </div>
 
       <div class="ml-4">
-        <p class="font-open-sans text-xl font-bold text-[#333]">Mark S.</p>
+        <p class="font-open-sans text-xl font-bold text-[#333]">{{ peer.name }}</p>
         <p class="font-open-sans text-xs font-semibold text-[#666]">Logged in today</p>
       </div>
     </div>
@@ -22,7 +27,7 @@
     <div class="mb-4">
       <p class="font-open-sans text-xs font-bold text-[#aaa] mb-2">ABOUT ME</p>
       <p class="font-open-sans text-sm text-[#333]">
-        I am a seasoned product manager with extensive experience in interview preparation.
+        {{ peer.about_me }}
       </p>
     </div>
 
@@ -32,35 +37,42 @@
         <p class="flex pt-0.5">
           <img src="../assets/availability.svg" alt="Availability" class="w-4 h-4 peer-icon" />
         </p>
-        <p class="font-open-sans text-sm text-[#333] ml-2">Available on Mon, Tue</p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">
+          Available on
+          {{ peer.availability.join(', ') }}
+        </p>
       </div>
 
       <div class="flex mb-2">
         <p class="flex pt-0.5">
           <img src="../assets/targeting.svg" alt="Tergeting" class="w-4 h-4 peer-icon" />
         </p>
-        <p class="font-open-sans text-sm text-[#333] ml-2">Targeting Google, Facebook, Amazon</p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">
+          Targeting {{ peer.companies.join(', ') }}
+        </p>
       </div>
 
       <div class="flex mb-2">
         <p class="flex pt-0.5">
           <img src="../assets/session.svg" alt="Session" class="w-4 h-4 peer-icon" />
         </p>
-        <p class="font-open-sans text-sm text-[#333] ml-2">24 sessions booked</p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">{{ peer.sessions }} sessions booked</p>
       </div>
 
       <div class="flex mb-2">
         <p class="flex pt-0.5">
           <img src="../assets/experience.svg" alt="Experience" class="w-4 h-4 peer-icon" />
         </p>
-        <p class="font-open-sans text-sm text-[#333] ml-2">3 years of experience</p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">
+          {{ peer.years_of_experience }} years of experience
+        </p>
       </div>
 
       <div class="flex">
         <p class="flex pt-0.5">
           <img src="../assets/location.svg" alt="Location" class="w-4 h-4 peer-icon" />
         </p>
-        <p class="font-open-sans text-sm text-[#333] ml-2">North America</p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">{{ peer.location }}</p>
       </div>
     </div>
 

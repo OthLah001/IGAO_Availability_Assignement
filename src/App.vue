@@ -3,10 +3,10 @@ import PeersList from './components/PeersList.vue'
 </script>
 
 <template>
-  <div class="h-full bg-[#fbfbfb]">
+  <div class="h-lvh bg-[#fbfbfb]">
     <div class="h-[70px] bg-[#498fe4]"></div>
 
-    <div class="pb-[30px] pt-[30px] h-full max-w-[1200px] lg:mx-auto ml-4 mr-4">
+    <div class="pb-[30px] pt-[30px] max-w-[1200px] lg:mx-auto ml-4 mr-4">
       <p class="ml-[3px] font-open-sans text-xl font-bold text-[#333] mb-[16px]">
         Hi Patrik, schedule your next practice session with a peer
       </p>
