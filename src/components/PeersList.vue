@@ -27,22 +27,26 @@ const filteredPeers = computed(() => {
 async function fetchData() {
   try {
     const response = await fetch('https://cdn.shopify.com/s/files/1/0417/7869/files/peers.json')
-
     const data = await response.json()
+    const now = new Date('2021-01-01T00:00:00') // Hardcoded date because peers are from 2021; normally it should be new Date()
+
     for (const peer of data) {
-      // Availabilities are from 2021, if it's up to me I'll display only the peer who are available in the future, but since it's not the case, I'll display all the peers
       peer.availability = [
         ...Array.from(
           new Set(
-            peer.availability.map((a) =>
-              new Date(a.start).toLocaleDateString('en-US', { weekday: 'short' }),
-            ),
+            peer.availability
+              .filter(
+                // Filter out availabilities that are less than 1 hour
+                (a: { start: string; end: string }) =>
+                  (new Date(a.end).getTime() - now.getTime()) / 1000 >= 3600,
+              )
+              .map((a) => new Date(a.start).toLocaleDateString('en-US', { weekday: 'short' })), // Display only the day of the week
           ),
         ),
       ]
     }
 
-    peers.value = data
+    peers.value = data.filter((peer: Peer) => peer.availability.length > 0) // Filter out peers with no availability
   } catch (error) {
     error.value = error
   } finally {
