@@ -4,6 +4,7 @@ import PeersList from './components/PeersList.vue'
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const selectedDays = ref<string[]>([])
+const name = ref('Patrik')
 
 const toggleDay = (day: string) => {
   if (day === 'ALL') {
@@ -31,7 +32,7 @@ const isDaySelected = (day: string) => {
 
     <div class="pb-[30px] pt-[30px] max-w-[1200px] lg:mx-auto ml-4 mr-4">
       <p class="ml-[3px] font-open-sans text-xl font-bold text-[#333] mb-[16px]">
-        Hi Patrik, schedule your next practice session with a peer
+        Hi {{ name }}, schedule your next practice session with a peer
       </p>
 
       <p class="mb-[11px] ml-[1px] font-open-sans text-xs font-bold text-[#aaa]">
