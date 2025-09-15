@@ -1,11 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import PeerCard from './PeerCard.vue'
 import { Peer } from '@/types/peer'
+
+const props = defineProps<{
+  selectedDays: string[]
+}>()
 
 const peers = ref<Peer[]>([])
 const loading = ref(true)
 const error = ref(null)
+
+const filteredPeers = computed(() => {
+  if (props.selectedDays.length === 0) {
+    return peers.value // Show all peers
+  }
+
+  // Filter peers
+  return peers.value.filter((peer) => {
+    return peer.availability.some((day) => {
+      return props.selectedDays.includes(day)
+    })
+  })
+})
 
 async function fetchData() {
   try {
@@ -62,7 +79,7 @@ fetchData()
   </div>
 
   <div class="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" v-else>
-    <PeerCard v-for="peer in peers" :key="peer.name" :peer="peer" />
+    <PeerCard v-for="peer in filteredPeers" :key="peer.name" :peer="peer" />
   </div>
 </template>
 

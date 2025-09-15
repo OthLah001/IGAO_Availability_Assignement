@@ -3,10 +3,7 @@ export type Peer = {
   name: string
   last_login: string
   about_me: string
-  availability: {
-    start: string
-    end: string
-  }[]
+  availability: string[] // Array of day names like ['Mon', 'Tue', 'Wed']
   companies: string[]
   sessions: number
   years_of_experience: number

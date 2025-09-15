@@ -1,5 +1,28 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import PeersList from './components/PeersList.vue'
+
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const selectedDays = ref<string[]>([])
+
+const toggleDay = (day: string) => {
+  if (day === 'ALL') {
+    selectedDays.value = []
+  } else {
+    const index = selectedDays.value.indexOf(day)
+    if (index > -1) {
+      selectedDays.value.splice(index, 1)
+    } else {
+      selectedDays.value.push(day)
+    }
+  }
+}
+const isDaySelected = (day: string) => {
+  if (day === 'ALL') {
+    return selectedDays.value.length === 0
+  }
+  return selectedDays.value.includes(day)
+}
 </script>
 
 <template>
@@ -17,57 +40,47 @@ import PeersList from './components/PeersList.vue'
 
       <!-- Filter peers available on -->
       <div class="flex flex-center mb-[49px] flex-wrap">
+        <!-- ALL button -->
         <div
-          class="w-[55px] h-8 mx-2 bg-[#007bca] shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
+          @click="toggleDay('ALL')"
+          :class="[
+            'w-[55px] h-8 mx-2 shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer',
+            isDaySelected('ALL') ? 'bg-[#007bca]' : 'bg-white',
+          ]"
         >
-          <span class="font-open-sans text-xs font-bold text-white"> ALL </span>
+          <span
+            :class="[
+              'font-open-sans text-xs font-bold',
+              isDaySelected('ALL') ? 'text-white' : 'text-[#498fe4]',
+            ]"
+          >
+            ALL
+          </span>
         </div>
 
+        <!-- Day buttons -->
         <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
+          v-for="day in days"
+          :key="day"
+          @click="toggleDay(day)"
+          :class="[
+            'w-[55px] h-8 mx-2 shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer',
+            isDaySelected(day) ? 'bg-[#007bca]' : 'bg-white',
+          ]"
         >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> MON </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> TUE </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> WED </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> THU </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> FRI </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> SAT </span>
-        </div>
-
-        <div
-          class="w-[55px] h-8 mx-2 bg-white shadow-[0 1px 2px 0 rgba(51, 51, 51, 0.12)] flex items-center justify-center cursor-pointer"
-        >
-          <span class="font-open-sans text-xs font-bold text-[#498fe4]"> SUN </span>
+          <span
+            :class="[
+              'font-open-sans text-xs font-bold uppercase',
+              isDaySelected(day) ? 'text-white' : 'text-[#498fe4]',
+            ]"
+          >
+            {{ day }}
+          </span>
         </div>
       </div>
 
       <!-- Peers available -->
-      <PeersList />
+      <PeersList :selectedDays="selectedDays" />
     </div>
   </div>
 </template>
