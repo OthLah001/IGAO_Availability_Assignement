@@ -78,7 +78,7 @@ fetchData()
     <p class="text-center text-red-500">Error fetching data</p>
   </div>
 
-  <div class="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" v-else>
+  <div class="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch" v-else>
     <PeerCard v-for="peer in filteredPeers" :key="peer.name" :peer="peer" />
   </div>
 </template>

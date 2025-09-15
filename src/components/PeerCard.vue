@@ -10,11 +10,20 @@ const { peer } = toRefs(props)
 </script>
 
 <template>
-  <div class="bg-white h-[451px] object-contain p-5 pb-3">
+  <div class="bg-white min-h-[451px] object-contain p-5 pb-3 flex flex-col">
     <!-- Avatar & Name -->
     <div class="flex mb-4">
-      <div class="w-18 h-18 rounded-full bg-gray-200">
-        <img :src="peer.image" alt="Peer" class="w-full h-full object-cover rounded-full" />
+      <div class="w-18 h-18 rounded-full bg-gray-200 flex items-center justify-center">
+        <img
+          v-if="peer.image"
+          :src="peer.image"
+          alt="Peer"
+          class="w-full h-full object-cover rounded-full"
+        />
+        <span v-else class="font-open-sans text-lg font-bold text-gray-600">
+          {{ peer.name.split(' ')[0][0].toUpperCase()
+          }}{{ peer.name.split(' ')[1][0].toUpperCase() }}
+        </span>
       </div>
 
       <div class="ml-4">
@@ -32,7 +41,7 @@ const { peer } = toRefs(props)
     </div>
 
     <!-- Availability & Details -->
-    <div class="mb-5">
+    <div class="mb-5 flex-1">
       <div class="flex mb-2">
         <p class="flex pt-0.5">
           <img src="../assets/availability.svg" alt="Availability" class="w-4 h-4 peer-icon" />
@@ -78,7 +87,7 @@ const { peer } = toRefs(props)
 
     <div class="h-[1px] bg-[#eee] mx-auto"></div>
 
-    <div class="h-[40px] flex items-end justify-center">
+    <div class="h-[40px] flex items-end justify-center border-t border-[#eee]">
       <p class="font-open-sans text-xs font-bold text-center text-[#007bca] cursor-pointer">
         BOOK ME
       </p>
