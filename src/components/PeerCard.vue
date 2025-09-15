@@ -1,0 +1,81 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div class="bg-white h-[451px] object-contain p-5 pb-3">
+    <!-- Avatar & Name -->
+    <div class="flex mb-4">
+      <div class="w-18 h-18 rounded-full bg-gray-200">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0417/7869/files/Mark.png"
+          alt="Peer"
+          class="w-full h-full object-cover rounded-full"
+        />
+      </div>
+
+      <div class="ml-4">
+        <p class="font-open-sans text-xl font-bold text-[#333]">Mark S.</p>
+        <p class="font-open-sans text-xs font-semibold text-[#666]">Logged in today</p>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="mb-4">
+      <p class="font-open-sans text-xs font-bold text-[#aaa] mb-2">ABOUT ME</p>
+      <p class="font-open-sans text-sm text-[#333]">
+        I am a seasoned product manager with extensive experience in interview preparation.
+      </p>
+    </div>
+
+    <!-- Availability & Details -->
+    <div class="mb-5">
+      <div class="flex mb-2">
+        <p class="flex pt-0.5">
+          <img src="../assets/availability.svg" alt="Availability" class="w-4 h-4 peer-icon" />
+        </p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">Available on Mon, Tue</p>
+      </div>
+
+      <div class="flex mb-2">
+        <p class="flex pt-0.5">
+          <img src="../assets/targeting.svg" alt="Tergeting" class="w-4 h-4 peer-icon" />
+        </p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">Targeting Google, Facebook, Amazon</p>
+      </div>
+
+      <div class="flex mb-2">
+        <p class="flex pt-0.5">
+          <img src="../assets/session.svg" alt="Session" class="w-4 h-4 peer-icon" />
+        </p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">24 sessions booked</p>
+      </div>
+
+      <div class="flex mb-2">
+        <p class="flex pt-0.5">
+          <img src="../assets/experience.svg" alt="Experience" class="w-4 h-4 peer-icon" />
+        </p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">3 years of experience</p>
+      </div>
+
+      <div class="flex">
+        <p class="flex pt-0.5">
+          <img src="../assets/location.svg" alt="Location" class="w-4 h-4 peer-icon" />
+        </p>
+        <p class="font-open-sans text-sm text-[#333] ml-2">North America</p>
+      </div>
+    </div>
+
+    <div class="h-[1px] bg-[#eee] mx-auto"></div>
+
+    <div class="h-[40px] flex items-end justify-center">
+      <p class="font-open-sans text-xs font-bold text-center text-[#007bca] cursor-pointer">
+        BOOK ME
+      </p>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.peer-icon {
+  filter: invert(72%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(89%) contrast(88%);
+}
+</style>
